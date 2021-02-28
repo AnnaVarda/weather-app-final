@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import "./Weather.css";
 
-export default function Weather() {
-  return (
+export default function Weather(props) {
+	const [weatherData, setWeatherData] = useState({ ready: false });
+	function handleResponse(response) {
+		setWeatherData({
+			ready: true,
+			temperature: response.data.main.temp,
+			date:"Sunday 10:00",
+			description:response.data.weather[0].description,
+			iconUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny_s_cloudy.png",
+			humidity:response.data.main.humidity,
+			wind: response.data.wind.speed,
+			city:response.data.name
+		});
+	}
+
+	if(weatherData.ready) {
+	return (
     <div className="Weather">
 			<form>
 				<div className="row">
@@ -14,29 +30,36 @@ export default function Weather() {
 					</div>
 				</div>
 			</form>
-			<h1>Athens</h1>
+			<h1>{weatherData.city}</h1>
 			<ul>
-				<li>Sunday 09:00</li>
-				<li>Clear sky</li>
+				<li>{weatherData.date}</li>
+				<li className="text-capitalize">{weatherData.description}</li>
 			</ul>
 			<div className="row mt-3">
 				<div className="col-6">
 					<div className="clearfix">
-					<img src="https://ssl.gstatic.com/onebox/weather/64/sunny_s_cloudy.png" alt="Clear sky" className="float-left"/>
+					<img src={weatherData.iconUrl} alt={weatherData.description} className="float-left"/>
 				<div className="float-left">
-					<span className="temperature">10</span>
+					<span className="temperature">{Math.round(weatherData.temperature)}</span>
 					<span className="unit">°C</span>
 					</div>	
 				</div>
 			</div>
 				<div calssName="col-6">
 					<ul>
-						<li>Humidity: 30%</li>
-						<li>Wind: 3 km/h</li>
+						<li>{weatherData.humidity}: 30%</li>
+						<li>{weatherData.wind}: 3 km/h</li>
 					</ul>
 				</div>
 			</div>
+		</div> );
+	}
 
-		</div>
-  );
+	else {
+	const apiKey="70b8d9569b173cc4fcd6655f362ece86";
+	const apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
+	axios.get(apiUrl).then(handleResponse);
+
+	return "Loading..."
+	}
 }
