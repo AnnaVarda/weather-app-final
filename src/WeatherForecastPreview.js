@@ -16,12 +16,12 @@ export default function WeatherForecastPreview(props) {
   return (
     <div className="WeatherForecastPreview col">   
 			{hours()}
-
+		<div className="clearfix">
 		  <img
         src={`http://openweathermap.org/img/wn/${props.data.weather[0].icon}@2x.png`}
         alt="weather"
       />
-
+		</div>
 			{temperature()}
 		</div>
  );
