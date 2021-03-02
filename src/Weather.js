@@ -4,7 +4,7 @@ import WeatherForecast from "./WeatherForecast";
 import axios from "axios";
 import "./Weather.css";
 
-import clearImage from "./images/clearImage/clearsky.png";
+import clearImage from "./images/clearImage/clearsky.jpg";
 import cloudsImage from "./images/cloudsImage/clouds.jpg";
 import rainImage from "./images/rainImage/rain.jpg";
 import thunderstormImage from "./images/thunderstormImage/thunder.jpg";
@@ -22,6 +22,7 @@ export default function Weather(props) {
     Thunderstorm: thunderstormImage,
 		Snow: snowImage,
 		Mist: mistImage,
+		Haze: mistImage
   };
 	
 	function handleResponse(response) {
@@ -67,7 +68,7 @@ export default function Weather(props) {
         >
 			<form onSubmit={handleSubmit}>
 				<div className="row">
-					<div className="col-6">
+					<div className="col-4">
 					<input type="search" placeholder="Enter a city..." className="form-control" autoFocus="on" onChange={handleCityChange}/>
 					</div>
 					<div className="col-3">
