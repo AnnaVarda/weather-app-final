@@ -10,7 +10,7 @@ export default function App() {
 	<Weather defaultCity="Athens"/>
     	<footer>
   This project was coded by Anna Vardaxoglou and is{" "}   
-      	<a href="https://github.com/AnnaVarda/weather-app-final" target="_blank">
+      	<a  href="https://github.com/AnnaVarda/weather-app-final" target="_blank" rel="noreferrer">
         open-sourced on GitHub
       	</a>  
     	</footer>
